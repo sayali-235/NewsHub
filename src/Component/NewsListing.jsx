@@ -1,24 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setNews, setSelectedArticle,toggleModal } from "../redux/actions";
 import NewsCard from "./NewsCard";
 import "./NewsListing.css";
 import NewsInfo from "./NewsInfo";
+ 
 
-function NewsListing({ category }) {
-  const [response, setResponse] = useState([]);
-  const [selectedArticle, setSelectedArticle] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+function NewsListing() {
+  
+  const dispatch =useDispatch();
+  const { category, news, selectedArticle,showModal }= useSelector((state) => state.newsSlice);
+
   const maxNewsCards = 60;
 
-  const apiUrl = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=21794adaee6e4f6b89170c96b832b0f3`;
+  const apiUrl = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=012b3ff0a1264eab8e6242f3c13617fa`;
 
   async function fetchNews() {
     try {
       const res = await fetch(apiUrl);
       const data = await res.json();
-      setResponse(data.articles || []);
+      dispatch(setNews(data.articles || []));
+      console.log(data.articles);
+      
     } catch (error) {
       console.error("Error in fetching news: ", error);
-      setResponse([]);
+      dispatch(setNews([]));
     }
   }
 
@@ -27,14 +33,14 @@ function NewsListing({ category }) {
   }, [category]);
 
   const handleCardClick = (article) => {
-    setSelectedArticle(article);
-    setShowModal(true);
+    dispatch(setSelectedArticle(article));
+    dispatch(toggleModal(true));
   };
 
   return (
     <div className="news-listing">
-      {response.length > 0 ? (
-        response
+      {news.length > 0 ? (
+        news
           .slice(0, maxNewsCards)
           .map((article, index) => (
             <NewsCard
@@ -51,7 +57,7 @@ function NewsListing({ category }) {
         <NewsInfo
           data={selectedArticle}
           showModal={showModal}
-          setShowModal={setShowModal}
+          setShowModal= {()=> dispatch(toggleModal(false))}
         />
       )}
     </div>

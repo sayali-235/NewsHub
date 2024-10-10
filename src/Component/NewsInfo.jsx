@@ -1,10 +1,14 @@
 import React from "react";
 import "./NewsInfo.css";
+import { useDispatch } from "react-redux";
+import { setSelectedArticle, toggleModal } from "../redux/actions";
+ 
 
 function NewsInfo(props) {
-  const { showModal, setShowModal, data } = props;
+  const dispatch = useDispatch();
+  const { data, showModal } = props;
   console.log("props info", props);
-  
+
   if (!showModal || !data) {
     return null;
   }
@@ -22,7 +26,10 @@ function NewsInfo(props) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="close-button" onClick={() => setShowModal(false)}>
+        <button
+          className="close-button"
+          onClick={() => dispatch(toggleModal(false))}
+        >
           Close
         </button>
         <div>
@@ -42,6 +49,7 @@ function NewsInfo(props) {
           </p>
           <p>{description}</p>
           <p>{content}</p>
+           
         </div>
       </div>
     </div>

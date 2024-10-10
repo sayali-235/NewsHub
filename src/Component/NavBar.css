@@ -59,3 +59,13 @@
     justify-content: flex-end;  
     display: flex;
 }
+
+button {
+    background-color: #b2c9d8;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button:hover{
+    color: rgb(214, 16, 16);
+}

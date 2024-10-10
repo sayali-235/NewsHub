@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../redux/actions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
-import { useState } from "react";
 
-function NavBar({ onCategorySelect }) {
-  const [activeCategory, setactiveCategory] = useState("sports");
+import { useNavigate } from "react-router-dom";
+ 
+
+function NavBar() {
+
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    alert("Are sure to Log Out");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+  const categories = [
+    { name: 'Sports', key: 'sports' },
+    { name: 'Politics', key: 'politics' },
+    { name: 'Health', key: 'health' },
+    { name: 'Entertainment', key: 'entertainment' },
+    { name: 'Technology', key: 'technology' },
+  ];
+
+  const dispatch = useDispatch();
+  const activeCategory = useSelector((state) => state.category);
 
   const handleCategoryClick = (category) => {
-    setactiveCategory(category);
-    onCategorySelect(category);
+    dispatch(setCategory(category));
   };
 
   return (
@@ -19,60 +39,22 @@ function NavBar({ onCategorySelect }) {
         </a>
         <div className="navbar-nav-container">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a
-                className={`nav-link ${
-                  activeCategory === "sports" ? "active" : ""
-                }`}
-                href="#"
-                onClick={() => handleCategoryClick("sports")}
+             {categories.map((category) =>(
+              <li
+                key={category.key}
+                className={`nav-item ${activeCategory === category.key ? "active" : ""}`}
               >
-                Sports
-              </a>
-            </li>
+                <a
+                  className="nav-link"
+                  href="#"
+                  onClick={() => handleCategoryClick(category.key)}
+                >
+                  {category.name}
+                </a>
+              </li>
+            ))}
             <li className="nav-item">
-              <a
-                className={`nav-link ${
-                  activeCategory === "politics" ? "active" : ""
-                }`}
-                href="#"
-                onClick={() => handleCategoryClick("politics")}
-              >
-                Politics
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${
-                  activeCategory === "health" ? "active" : ""
-                }`}
-                href="#"
-                onClick={() => handleCategoryClick("health")}
-              >
-                Health
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${
-                  activeCategory === "entertainment" ? "active" : ""
-                }`}
-                href="#"
-                onClick={() => handleCategoryClick("entertainment")}
-              >
-                Entertainment
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${
-                  activeCategory === "technology" ? "active" : ""
-                }`}
-                href="#"
-                onClick={() => handleCategoryClick("technology")}
-              >
-                Technology
-              </a>
+              <button onClick={handleLogOut}>LogOut</button>
             </li>
           </ul>
         </div>

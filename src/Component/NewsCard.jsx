@@ -1,10 +1,12 @@
 import "./NewsCard.css";
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedArticle, toggleModal } from "../redux/actions";
 import logo from "../assets/logo.jpg";
 
 function NewsCard(props) {
   const { title, description, urlToImage } = props.data;
-  const { onCardClick } = props;
+    const dispatch = useDispatch();
 
   const [imageSrc, setImageSrc] = useState(urlToImage || logo);
 
@@ -14,7 +16,8 @@ function NewsCard(props) {
   }, [urlToImage]);  
 
   const handleCardClick = () => {
-    onCardClick(props.data);
+    dispatch(setSelectedArticle(props.data));
+    dispatch(toggleModal(true));
   };
 
   const handleError = () => {

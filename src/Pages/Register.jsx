@@ -15,7 +15,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.phone) {
+    if (!formData.username || !formData.email || !formData.phone || !formData.password) {
       alert("Kindly Fill the all details");
       return;
     }
@@ -33,18 +33,25 @@ const Register = () => {
 
     localStorage.setItem("users", JSON.stringify(users));
 
+     
+
     dispatch(
       setFormData({
         username: "",
         email: "",
         phone: "",
+        password :"",
       })
     );
 
     navigate("/login");
   };
+
+  
   return (
+    
     <div className="register_page">
+      <div className="register_content">
       <h2 className="details">Register</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -72,7 +79,18 @@ const Register = () => {
           <input
             type="text"
             name="phone"
+            autoComplete="off"
             value={formData.phone}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Password:{" "}
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
             onChange={handleChange}
           />
         </label>
@@ -82,6 +100,7 @@ const Register = () => {
       <p>
         Already have an account ? <Link to="/login">Login here</Link>
       </p>
+      </div>
     </div>
   );
 };

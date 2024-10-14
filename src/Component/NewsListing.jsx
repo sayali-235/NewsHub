@@ -9,18 +9,22 @@ import NewsInfo from "./NewsInfo";
 function NewsListing() {
   
   const dispatch =useDispatch();
+  
   const { category, news, selectedArticle,showModal }= useSelector((state) => state.newsSlice);
 
   const maxNewsCards = 60;
 
-  const apiUrl = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=012b3ff0a1264eab8e6242f3c13617fa`;
+  const apiUrl = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=a5ec5e3fd3c345bb8d78ead860364892`;
 
   async function fetchNews() {
     try {
       const res = await fetch(apiUrl);
+      console.log("response:",res)
       const data = await res.json();
+    
       dispatch(setNews(data.articles || []));
-      console.log(data.articles);
+     console.log(data.articles);
+      
       
     } catch (error) {
       console.error("Error in fetching news: ", error);

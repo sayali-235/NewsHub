@@ -6,10 +6,9 @@ import logo from "../assets/logo.jpg";
 
 function NewsCard(props) {
   const { title, description, urlToImage } = props.data;
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [imageSrc, setImageSrc] = useState(urlToImage || logo);
-
    
   useEffect(() => {
     setImageSrc(urlToImage || logo);

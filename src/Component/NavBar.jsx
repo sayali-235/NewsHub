@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../redux/actions";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
  
 
 function NavBar() {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const activeCategory = useSelector((state) => state.category);
+
+  
   const handleLogOut = () => {
     alert("Are sure to Log Out");
     localStorage.removeItem("user");
+    
     navigate("/login");
   };
 
@@ -24,11 +29,10 @@ function NavBar() {
     { name: 'Technology', key: 'technology' },
   ];
 
-  const dispatch = useDispatch();
-  const activeCategory = useSelector((state) => state.category);
-
+  
   const handleCategoryClick = (category) => {
     dispatch(setCategory(category));
+    navigate(`/home/${category}`)
   };
 
   return (
@@ -44,13 +48,14 @@ function NavBar() {
                 key={category.key}
                 className={`nav-item ${activeCategory === category.key ? "active" : ""}`}
               >
-                <a
+                 <NavLink
                   className="nav-link"
-                  href="#"
-                  onClick={() => handleCategoryClick(category.key)}
+                  to={`/home/${category.key}`}
+                  onClick={() => handleCategoryClick(category.key)}   
+                  activeClassName="active"  
                 >
                   {category.name}
-                </a>
+                </NavLink>
               </li>
             ))}
             <li className="nav-item">

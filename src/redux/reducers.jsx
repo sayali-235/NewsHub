@@ -1,4 +1,4 @@
-import { SET_CATEGORY, SET_NEWS, SET_SELECTED_ARTICLE,setSelectedArticle,TOGGLE_MODAL,SET_FORMDATA, setFormData } from "./actions";
+import { SET_CATEGORY, SET_NEWS, SET_SELECTED_ARTICLE, TOGGLE_MODAL,SET_FORMDATA} from "./actions";
 
 const initalState ={
     category :"sports",
@@ -9,6 +9,7 @@ const initalState ={
         username:"",
         email:"",
         phone:"",
+        password:"",
     },
 };
 

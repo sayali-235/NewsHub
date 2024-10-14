@@ -1,7 +1,7 @@
 import React from "react";
 import "./NewsInfo.css";
 import { useDispatch } from "react-redux";
-import { setSelectedArticle, toggleModal } from "../redux/actions";
+import {  toggleModal } from "../redux/actions";
  
 
 function NewsInfo(props) {

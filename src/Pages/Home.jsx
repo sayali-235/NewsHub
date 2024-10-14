@@ -1,31 +1,29 @@
-import React, { useState} from "react";
+import React, { useEffect } from "react";
 import NavBar from "../Component/NavBar";
 import NewsListing from "../Component/NewsListing";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../redux/actions";
 
-const Home=() => {
-    const dispatch= useDispatch();
-    const {selectedCategory} =useSelector((state) => state.newsSlice)
-    const navigate = useNavigate();
-    const token =localStorage.getItem("token")
-    console.log("token",token);    
+const Home = () => {
+  const dispatch = useDispatch();
+  const {category} =useParams();
+  const { selectedCategory } = useSelector((state) => state.newsSlice);
 
-    if(!token)
+
+  useEffect(() =>{
+    if(category)
     {
-        navigate("/login");
-        return null;
+      dispatch(setCategory(category));
     }
-
-    const handleCategorySelect =(category)=> {
-        dispatch(selectedCategory(category));
-    };
-    return(
-        <>
-            <NavBar onCategorySelect={handleCategorySelect} />
-            <NewsListing category={selectedCategory} />
-        </>
-    );
-}
+  },[category,dispatch]);
+  
+  return (
+    <>
+      <NavBar onCategorySelect= {(category) => dispatch(setCategory(category))} />
+      <NewsListing category={selectedCategory} />
+    </>
+  );
+};
 
 export default Home;

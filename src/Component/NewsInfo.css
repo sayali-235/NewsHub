@@ -13,7 +13,7 @@
   
   .modal-content {
     text-align:justify ;
-    background: #fff;  
+    background: #bdb4b4;  
     border-radius: 8px;  
     width: 90%;  
     max-width: 600px; 
@@ -22,6 +22,7 @@
     position: relative;  
     overflow-y: auto;  
     max-height: 80vh; 
+    color: #110909;
    
     
   }
@@ -45,29 +46,25 @@
   
   .news-details {
     margin-top: 15px;
+     
       
   }
   
   .news-details h2 {
     margin: 0 0 10px 0;  
-    font-size: 24px;  
+    font-size: 24px; 
+     
   }
   
   .news-details p {
     margin: 5px 0;  
-    line-height: 1.5;  
-    color: #555; 
+    line-height: 1.5;   
     text-align: justify; 
+    color: #000;
   }
   
   .news-details strong {
     color: #000;  
   }
-
-/* .readmore {
-  font-weight: bold;
-  font-family: Arial,  sans-serif;
-  font-size: 20px;
-  align-items: end;
-} */
+ 
   

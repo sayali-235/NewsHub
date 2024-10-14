@@ -16,52 +16,67 @@ const Login = () => {
   };
 
   const handleSubmit =  (e) =>{
-    if(!formData.username ||  !formData.email)
+    if(!formData.username ||  !formData.password)
     {
       alert("Kindly fill the credentials");
       return;
     }
+
     e.preventDefault();
     const users= JSON.parse(localStorage.getItem("users") ) || [];
+
     const user=users.find(
-      (u) => u.username ===formData.username && u.email === formData.email
+      (u) => u.username ===formData.username && u.password === formData.password
     );
+    
      
     if(user)
     {
-      localStorage.setItem("token","123456789");
+     localStorage.setItem("token","123456789");
       navigate("/home");
     }
     else{
       alert("Invalid Credentials");
     }
+    
+    dispatch(setFormData({
+      username: "",
+      password: "",
+  }))
   };
+
     return  (
       <div className="login_page">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
+        <div className="login_content">
+        <h2 className="details">Login</h2>
+        <form  onSubmit={handleSubmit}>
           <label>
             Username:{" "}
             <input
               type="text"
               name="username"
+              autoComplete="off"
               value={formData.username}
               onChange={handleChange}
             />
           </label>
           <br />
           <label>
-            Email:{" "}
+            Password:{" "}
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="password"
+              name="password"
+              value={formData.password}
               onChange={handleChange}
             />
           </label>
           <br />
           <button type="submit">Login</button>
         </form>
+        <p>
+        Create new account:- <Link to="/register">Register Here</Link>
+      </p>
+      </div>
       </div>
     );
   }
@@ -69,3 +84,5 @@ const Login = () => {
 
 
 export default Login;
+
+

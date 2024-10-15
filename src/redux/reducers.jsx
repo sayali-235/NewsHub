@@ -1,16 +1,24 @@
-import { SET_CATEGORY, SET_NEWS, SET_SELECTED_ARTICLE, TOGGLE_MODAL,SET_FORMDATA} from "./actions";
+import { SET_CATEGORY, SET_NEWS, SET_SELECTED_ARTICLE, TOGGLE_MODAL,SET_FORMDATA, SET_ERRORS,SET_IMAGE_SRC} from "./actions";
 
 const initalState ={
     category :"sports",
     news :[],
     selectedArticle :null,
     showModal:false,
+    imageSrc :"",
     formData: {
         username:"",
         email:"",
         phone:"",
         password:"",
     },
+    errors :{
+        username: "",
+        email: "",
+        phone: "",
+        password: ""
+    },
+    
 };
 
  export const newsReducer =(state =initalState,action) =>{
@@ -30,6 +38,12 @@ const initalState ={
 
         case SET_FORMDATA :
             return { ...state, formData : action.payload};
+
+        case SET_ERRORS:
+            return  { ...state, errors :action.payload}
+
+        case SET_IMAGE_SRC:
+            return { ...state,imageSrc : action.payload}
 
         default:
             return state;

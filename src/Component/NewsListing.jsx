@@ -4,34 +4,32 @@ import { setNews, setSelectedArticle,toggleModal } from "../redux/actions";
 import NewsCard from "./NewsCard";
 import "./NewsListing.css";
 import NewsInfo from "./NewsInfo";
+import axios from "axios";
  
 
 function NewsListing() {
   
   const dispatch =useDispatch();
   
-  const { category, news, selectedArticle,showModal }= useSelector((state) => state.newsSlice);
+  const { category, news, selectedArticle,showModal,imageSrc }= useSelector((state) => state.newsSlice);
 
   const maxNewsCards = 60;
 
-  const apiUrl = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=a5ec5e3fd3c345bb8d78ead860364892`;
-
-  async function fetchNews() {
-    try {
-      const res = await fetch(apiUrl);
-      console.log("response:",res)
-      const data = await res.json();
-    
-      dispatch(setNews(data.articles || []));
-     console.log(data.articles);
-      
-      
-    } catch (error) {
-      console.error("Error in fetching news: ", error);
-      dispatch(setNews([]));
-    }
+  const apiUrl = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=cdbd01085d44415194b6b2765c458da2`;
+  async function fetchNews(){
+  try{
+    const res=await axios.get(apiUrl);
+    const data=res.data;
+    console.log("data" ,data);
+    dispatch(setNews(data.articles || []));
+   console.log(data.articles);
   }
-
+  catch(error){
+    console.error("Error in fetching news: ", error);
+    dispatch(setNews([]));
+  }
+}
+  
   useEffect(() => {
     fetchNews();
   }, [category]);

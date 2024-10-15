@@ -8,25 +8,28 @@ import PrivateRoute from "./Pages/PrivateRoute";
 
 function App() {
      
-    const token=localStorage.getItem("token");
-    localStorage.removeItem("token");
+    const userToken=localStorage.getItem("user");
+   // console.log("token data:" , token)
+   // localStorage.removeItem("token");
      
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={ <Register />} />
-        <Route path="/register" element={token ? <Navigate to="/home"replace  />:<Register />} />
-        <Route path="/login" element={token ? <Navigate to="/home" replace />:<Login />} />
+        <Route path="/" element={ userToken ? <Navigate to ="/home"/> : <Register />} />
+        <Route path="/register" element={userToken ? <Navigate to="/home"replace  />:<Register />} />
+        <Route path="/login" element={userToken ? <Navigate to="/home" replace />:<Login />} />
         <Route path="/home" element={
+          
           <PrivateRoute>
             <Home />
             </PrivateRoute>
-            
         } 
-        
        />
-       <Route path="/home/:category" element={<PrivateRoute><Home /></PrivateRoute>} />
+       <Route path="/home/:category" element={
+        <PrivateRoute>
+        <Home />
+        </PrivateRoute>} />
       </Routes>
     </Router>
   );

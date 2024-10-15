@@ -36,6 +36,7 @@ margin: 0;
   background-color: rgba(179, 165, 165, 0.589);  
   width: 100%;
   max-width: 400px;
+  height: 90%;
   padding: 20px;
   border: 1px solid #9c9494;
   border-radius: 5px;
@@ -103,5 +104,10 @@ margin: 0;
   
   p > a:hover {
     text-decoration: underline;
+  }
+  
+  .error {
+    color: rgb(122, 4, 4);
+    font-size: 15px;
   }
   

@@ -11,7 +11,7 @@ function NewsListing() {
   
   const dispatch =useDispatch();
   
-  const { category, news, selectedArticle,showModal,imageSrc }= useSelector((state) => state.newsSlice);
+  const { category, news, selectedArticle,showModal }= useSelector((state) => state.newsSlice);
 
   const maxNewsCards = 60;
 

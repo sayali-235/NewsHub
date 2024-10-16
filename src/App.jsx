@@ -9,8 +9,6 @@ import PrivateRoute from "./Pages/PrivateRoute";
 function App() {
      
     const userToken=localStorage.getItem("user");
-   // console.log("token data:" , token)
-   // localStorage.removeItem("token");
      
 
   return (
@@ -20,7 +18,6 @@ function App() {
         <Route path="/register" element={userToken ? <Navigate to="/home"replace  />:<Register />} />
         <Route path="/login" element={userToken ? <Navigate to="/home" replace />:<Login />} />
         <Route path="/home" element={
-          
           <PrivateRoute>
             <Home />
             </PrivateRoute>

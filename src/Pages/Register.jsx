@@ -51,8 +51,7 @@ const Register = () => {
       return;   
     }
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
+    const users = JSON.parse(localStorage.getItem("users")) ||[] ;
     const userExists = users.some(
       (user) => user.username === formData.username.trim()
     );

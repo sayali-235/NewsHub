@@ -16,7 +16,7 @@ function NewsCard(props) {
    
   useEffect(() => {
     setImageSrc(urlToImage || logo);
-  }, [, urlToImage]);  
+  }, [urlToImage]);  
 
   const handleCardClick = () => {
     dispatch(setSelectedArticle(props.data));
